@@ -1,0 +1,22 @@
+deploy:
+  userName: zhoufurong
+  password: Karl1234
+  repo:
+    url: http://git.tuandai888.com/cg-services/
+    path: E:\project\ #git操作的目录
+  sql:
+    url: http://git.tuandai888.com/testing--functional/
+    path: /data/deploy/ #git操作的目录
+  sourcePath: F:\python\prod-project\ #拉取新分支用的
+
+  filePath:
+    firstStep: E:\upload  #上传文件的地址
+
+  dingding:
+    url: https://oapi.dingtalk.com/robot/send?access_token=fec120ab71d1cc6e5ddd79b6ffde99f75e9138a2e3b3010ae0f216ed6398b0d2
+    atNumber: 15017125284
+
+
+
+
+

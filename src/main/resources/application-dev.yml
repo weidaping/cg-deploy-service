@@ -1,0 +1,13 @@
+deploy:
+  userName: chenqiunuan
+  password: test123456
+  repo:
+    url: http://git.tuandai888.com/update/
+    path: F:\\python\\deploy\\
+  sourcePath: F:\python\prod-project
+
+  filePath:
+    firstStep: \data\firstStep
+    secondStep: \data\secondStep
+
+

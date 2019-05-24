@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuandai.cg.html.dao.GroupDao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.tuandai.cg.html.model.Group">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="group_id" property="groupId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        id,
+        group_id
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="group.id">
+        INSERT INTO deploy_group (
+            id,
+            group_id
+        ) VALUES (
+            #{group.id,jdbcType=INTEGER},
+            #{group.groupId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="group.id">
+        INSERT INTO deploy_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="group.id!=null"> id,</if>
+            <if test="group.groupId!=null"> group_id,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="group.id!=null">#{group.id,jdbcType=INTEGER},
+            </if>
+            <if test="group.groupId!=null">#{group.groupId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO deploy_group (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="groups" item="group" index="index" separator=",">
+            (
+            #{group.id,jdbcType=INTEGER},
+            #{group.groupId,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE deploy_group
+        <set>
+            <if test="group.id != null"> id= #{group.id,jdbcType=INTEGER},</if>
+            <if test="group.groupId != null"> group_id= #{group.groupId,jdbcType=VARCHAR}</if>
+        </set>
+        WHERE id = #{group.id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getAllGroup" resultMap="BaseResultMap">
+        select * from deploy_group
+    </select>
+</mapper>
+

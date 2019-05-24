@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" style="height: auto">
+<head>
+    <meta charset="UTF-8"/>
+    <title>登录</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Cache-control" content="no-cache"/>
+    <meta http-equiv="Cache" content="no-cache"/>
+
+    <link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css"/>
+    <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css"/>
+    <link rel="stylesheet" href="../../css/main.css"/>
+    <link rel="stylesheet" href="../../css/AdminLTE.min.css"/>
+    <script src="../../libs/jquery.min.js"></script>
+    <script src="../../plugins/layer/layer.js"></script>
+    <script src="../../libs/bootstrap.min.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../../js/common.js"></script>
+</head>
+<body class="login-page" style="height: auto">
+<div id="rrapp" class="login-box">
+    <div class="login-box-body">
+        <div id="failTips" class="alert alert-danger alert-dismissible" style="display: none">
+
+        </div>
+        <div class="form-group has-feedback">
+            <input placeholder="用户名" class="form-control has-feedback" id="username"/>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input placeholder="密码" type="password" class="form-control has-feedback" id="password"/>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button id="submitBtn" type="submit" class="btn btn-primary btn-block btn-flat" onclick="login();">登录</button>
+            </div>
+        </div>
+    </div>
+    <div id="uploadTips" style="display:none;width: 80px; height: 30px; background: #00a7d0; z-index: 9999;  position: fixed; top: 0px;left: 0px;right: 0px;bottom: 0px; margin: auto">
+        <div style="margin-top: 4px; text-align: center; font-size:16px;  ">登录中...</div>
+    </div>
+</div>
+</body>
+<script src="../../js/login.js"></script>
+
+</html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuandai.cg.html.dao.SqlRecordDao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.tuandai.cg.html.model.SqlRecord">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="record_no" property="recordNo" jdbcType="VARCHAR"/>
+        <result column="demand_name" property="demandName" jdbcType="VARCHAR"/>
+        <result column="upload_username" property="uploadUsername" jdbcType="VARCHAR"/>
+        <result column="text_url" property="textUrl" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="already_push" property="alreadyPush" jdbcType="INTEGER"/>
+        <result column="has_send" property="hasSend" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="push_time" property="pushTime" jdbcType="TIMESTAMP"/>
+        <result column="commit_version" property="commitVersion" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        id,
+        record_no,
+        demand_name,
+        upload_username,
+        text_url,
+        remark,
+        already_push,
+        has_send,
+        create_time,
+        push_time,
+        commit_version
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="sqlRecord.id">
+        INSERT INTO deploy_sql_record (
+            record_no,
+            demand_name,
+            upload_username,
+            text_url,
+            remark
+        ) VALUES (
+            #{sqlRecord.recordNo,jdbcType=VARCHAR},
+            #{sqlRecord.demandName,jdbcType=VARCHAR},
+            #{sqlRecord.uploadUsername,jdbcType=VARCHAR},
+            #{sqlRecord.textUrl,jdbcType=VARCHAR},
+            #{sqlRecord.remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO deploy_sql_record (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="sqlRecords" item="sqlRecord" index="index" separator=",">
+            (
+            #{sqlRecord.id,jdbcType=BIGINT},
+            #{sqlRecord.recordNo,jdbcType=VARCHAR},
+            #{sqlRecord.demandName,jdbcType=VARCHAR},
+            #{sqlRecord.uploadUsername,jdbcType=VARCHAR},
+            #{sqlRecord.textUrl,jdbcType=VARCHAR},
+            #{sqlRecord.remark,jdbcType=VARCHAR},
+            #{sqlRecord.alreadyPush,jdbcType=INTEGER},
+            #{sqlRecord.hasSend,jdbcType=INTEGER},
+            #{sqlRecord.createTime,jdbcType=DATE},
+            #{sqlRecord.pushTime,jdbcType=DATE}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getSqlList" resultMap="BaseResultMap">
+        select * from deploy_sql_record
+        order by create_time desc
+        <if test="offset != null and limit != null ">
+            limit ${offset}, ${limit}
+        </if>
+    </select>
+
+    <select id="getSqlListCount" resultType="java.lang.Integer">
+        select count(1) from deploy_sql_record
+    </select>
+
+    <select id="getByRecordNo" resultMap="BaseResultMap">
+        select * from deploy_sql_record
+        where record_no = #{recordNo}
+    </select>
+
+    <update id="updatePushTime">
+        UPDATE deploy_sql_record
+        <set>
+            already_push = 1,
+            commit_version = #{commitVersion},
+            push_time = now()
+        </set>
+        where record_no = #{recordNo}
+    </update>
+
+    <update id="updateHasSend">
+        update deploy_sql_record
+        set has_send = 1
+        where record_no = #{recordNo}
+    </update>
+
+</mapper>
+

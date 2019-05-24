@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuandai.cg.html.dao.DevRecordDao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.tuandai.cg.html.model.DevRecord">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="service_name" property="serviceName" jdbcType="VARCHAR"/>
+        <result column="dev_username" property="devUsername" jdbcType="VARCHAR"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="file_dir" property="fileDir" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="build_no" property="buildNo" jdbcType="INTEGER"/>
+        <result column="git_version" property="gitVersion" jdbcType="VARCHAR"/>
+        <result column="text_url" property="textUrl" jdbcType="VARCHAR"/>
+        <result column="already_push" property="alreadyPush" jdbcType="INTEGER"/>
+        <result column="has_send" property="hasSend" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="push_time" property="pushTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        id,
+        service_name,
+        dev_username,
+        file_name,
+        file_dir,
+        remark,
+        build_no,
+        git_version,
+        text_url,
+        already_push,
+        has_send,
+        push_time,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="devRecord.id">
+        INSERT INTO deploy_dev_record (
+            service_name,
+            dev_username,
+            file_name,
+            file_dir,
+            remark,
+            build_no,
+            git_version,
+            text_url
+        ) VALUES (
+            #{devRecord.serviceName,jdbcType=VARCHAR},
+            #{devRecord.devUsername,jdbcType=VARCHAR},
+            #{devRecord.fileName,jdbcType=VARCHAR},
+            #{devRecord.fileDir,jdbcType=VARCHAR},
+            #{devRecord.remark,jdbcType=VARCHAR},
+            #{devRecord.buildNo,jdbcType=INTEGER},
+            #{devRecord.gitVersion,jdbcType=VARCHAR},
+            #{devRecord.textUrl,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+    <!--auto generated Code-->
+    <update id="updatePushTime">
+        UPDATE deploy_dev_record
+        <set>
+            already_push = 1,
+            push_time = now()
+        </set>
+        where service_name = #{serviceName}
+        and build_no = #{buildNo}
+    </update>
+
+    <select id="getBuildNoByServiceName" resultType="java.lang.Integer">
+        select build_no from deploy_dev_record
+        where service_name = #{serviceName}
+        order by build_no desc
+    </select>
+
+    <select id="getBuildNoDesc" resultType="java.lang.String">
+        select remark from deploy_dev_record
+        where service_name = #{serviceName}
+        and build_no = #{buildNo}
+    </select>
+
+    <select id="getByServiceNameAndBuildNo" resultMap="BaseResultMap">
+        select * from deploy_dev_record
+        where service_name = #{serviceName}
+        and build_no = #{buildNo}
+    </select>
+
+    <select id="getBuildList" resultMap="BaseResultMap">
+        select * from deploy_dev_record
+        <if test="serviceName != null">
+            where service_name = #{serviceName}
+        </if>
+        order by create_time desc
+        <if test="offset != null and limit != null ">
+            limit ${offset}, ${limit}
+        </if>
+    </select>
+
+    <select id="getBuildListCount" resultType="java.lang.Integer">
+        select count(1) from deploy_dev_record
+        <if test="serviceName != null">
+            where service_name = #{serviceName}
+        </if>
+    </select>
+
+    <update id="updateHasSend">
+        update deploy_dev_record
+        set has_send = 1
+        where service_name = #{serviceName}
+        and build_no = #{buildNo}
+    </update>
+
+    <update id="updateTextUrl">
+        update deploy_dev_record
+        set text_url = #{textUrl}
+        where service_name = #{serviceName}
+        and build_no = #{buildNo}
+    </update>
+
+</mapper>
+

@@ -1,0 +1,37 @@
+server:
+  port: 12321
+
+spring:
+  profiles:
+    active: test
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.100.11.60:3306/cg_deploy?characterEncoding=utf8&useSSL=false
+    username: root
+    password: OIQFF1123
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+  tomcat:
+    uri-encoding: UTF-8
+
+  thymeleaf:
+    prefix: classpath:/static/
+    suffix: .html
+  resources:
+    static-locations: classpath:/views/,classpath:/static/
+
+mybatis:
+  type-aliases-package: com.tuandai.cg.html.model
+  mapper-locations: classpath:mappers/*.xml
+
+
+
+

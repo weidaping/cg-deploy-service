@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>说明</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Cache-control" content="no-cache"/>
+    <meta http-equiv="Cache" content="no-cache"/>
+
+    <link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css"/>
+    <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css"/>
+    <link rel="stylesheet" href="../../css/main.css"/>
+    <script src="../../libs/jquery.min.js"></script>
+    <script src="../../plugins/layer/layer.js"></script>
+    <script src="../../libs/bootstrap.min.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../../js/common.js"></script>
+</head>
+<body>
+<div id="rrapp">
+    <div class="form-group">
+        <label class="control-label col-lg-1">说明</label>
+        <div class="col-lg-5 col-md-6" style="padding: 5px 15px">
+            <textarea maxlength="200" style="resize: none" rows="5" class="form-control" id="remark"></textarea>
+        </div>
+        <input style="display: none" type="text" class="form-control" id="serviceName" value=""/>
+        <input style="display: none" type="text" class="form-control" id="buildNo" value=""/>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10" style="text-align: right">
+            <button id="submitBtn" type="submit" class="btn btn-primary" onclick="pushFile();">推送</button>
+        </div>
+    </div>
+    <div id="uploadTips" style="display:none;width: 80px; height: 30px; background: #00a7d0; z-index: 9999;  position: fixed; top: 0px;left: 0px;right: 0px;bottom: 0px; margin: auto">
+        <div style="margin-top: 4px; text-align: center; font-size:16px;  ">推送中...</div>
+    </div>
+</div>
+</body>
+<script src="../../js/description.js"></script>
+
+</html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuandai.cg.html.dao.ConfigDao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.tuandai.cg.html.model.Config">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="service_name" property="serviceName" jdbcType="VARCHAR"/>
+        <result column="current_build_no" property="currentBuildNo" jdbcType="INTEGER"/>
+        <result column="in_use" property="inUse" jdbcType="INTEGER"/>
+        <result column="group_id" property="groupId" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        id,
+        service_name,
+        current_build_no,
+        in_use,
+        group_id,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert">
+        INSERT INTO deploy_config (
+            service_name
+        ) VALUES (
+            #{serviceName,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="config.id">
+        INSERT INTO deploy_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="config.id!=null"> id,</if>
+            <if test="config.serviceName!=null"> service_name,</if>
+            <if test="config.currentBuildNo!=null"> current_build_no,</if>
+            <if test="config.inUse!=null"> in_use,</if>
+            <if test="config.groupId!=null"> group_id,</if>
+            <if test="config.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="config.id!=null">#{config.id,jdbcType=INTEGER},
+            </if>
+            <if test="config.serviceName!=null">#{config.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="config.currentBuildNo!=null">#{config.currentBuildNo,jdbcType=INTEGER},
+            </if>
+            <if test="config.inUse!=null">#{config.inUse,jdbcType=INTEGER},
+            </if>
+            <if test="config.groupId!=null">#{config.groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="config.createTime!=null">#{config.createTime,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO deploy_config (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="configs" item="config" index="index" separator=",">
+            (
+            #{config.id,jdbcType=INTEGER},
+            #{config.serviceName,jdbcType=VARCHAR},
+            #{config.currentBuildNo,jdbcType=INTEGER},
+            #{config.inUse,jdbcType=INTEGER},
+            #{config.groupId,jdbcType=VARCHAR},
+            #{config.createTime,jdbcType=DATE}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE deploy_config
+        <set>
+            <if test="config.id != null"> id= #{config.id,jdbcType=INTEGER},</if>
+            <if test="config.serviceName != null"> service_name= #{config.serviceName,jdbcType=VARCHAR},</if>
+            <if test="config.currentBuildNo != null"> current_build_no= #{config.currentBuildNo,jdbcType=INTEGER},</if>
+            <if test="config.inUse != null"> in_use= #{config.inUse,jdbcType=INTEGER},</if>
+            <if test="config.groupId != null"> group_id= #{config.groupId,jdbcType=VARCHAR},</if>
+            <if test="config.createTime != null"> create_time= #{config.createTime,jdbcType=DATE}</if>
+        </set>
+        WHERE id = #{config.id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getAllInUse" resultMap="BaseResultMap">
+        select * from deploy_config
+        where in_use = 1
+        order by service_name asc
+    </select>
+
+    <select id="getCurrentBuildNo" resultType="java.lang.Integer">
+        select current_build_no  from deploy_config
+        where service_name = #{serviceName}
+    </select>
+
+    <update id="updateCurrentBuildNo">
+        UPDATE deploy_config
+        set current_build_no = #{newBuildNo}
+        where service_name = #{serviceName}
+        and current_build_no = #{newBuildNo} - 1
+    </update>
+</mapper>
+
